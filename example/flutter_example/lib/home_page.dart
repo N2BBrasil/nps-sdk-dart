@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:nps_sdk/nps_sdk.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,9 +16,10 @@ class _HomePageState extends State<HomePage> {
   TextEditingController _cardController;
   TextEditingController _cvvController;
   TextEditingController _expController;
-  
-  //Text Variables 
-  String _introText = "In this demo the user has chosen to pay with credit card so the payment form has been displayed";
+
+  //Text Variables
+  String _introText =
+      "In this demo the user has chosen to pay with credit card so the payment form has been displayed";
   String _name = "Jhon Smith";
   String _card = "4507990000000010";
   String _cvv = "123";
@@ -47,9 +49,10 @@ class _HomePageState extends State<HomePage> {
         "ExpirationDate": _expController.text
       },
       "psp_ClientSession": "YOUR_CLIENT_SESSION"
-    }; 
+    };
 
-    var response = await nps.createPaymentMethodToken(nps, createPaymentMethodTokenParams);
+    var response =
+        await nps.createPaymentMethodToken(nps, createPaymentMethodTokenParams);
 
     setState(() {
       _responseMsg = response["psp_ResponseMsg"];
@@ -67,39 +70,46 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             new Text(_introText),
             new Container(
-              margin: new EdgeInsets.only(left: 120.0, right: 120.0, top: 5.0,),
-              child:  new TextField(
+              margin: new EdgeInsets.only(
+                left: 120.0,
+                right: 120.0,
+                top: 5.0,
+              ),
+              child: new TextField(
                 controller: _nameController,
               ),
             ),
             new Container(
               margin: new EdgeInsets.only(left: 120.0, right: 120.0),
-              child:  new TextField(
+              child: new TextField(
                 controller: _cardController,
               ),
             ),
             new Container(
               margin: new EdgeInsets.only(left: 120.0, right: 120.0),
-              child:  new TextField(
+              child: new TextField(
                 controller: _cvvController,
               ),
             ),
             new Container(
               margin: new EdgeInsets.only(left: 120.0, right: 120.0),
-              child:  new TextField(
+              child: new TextField(
                 controller: _expController,
               ),
             ),
             new Container(
               margin: new EdgeInsets.all(15.0),
-                child: new Text(_responseMsg, textAlign: TextAlign.center, style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),), 
+              child: new Text(
+                _responseMsg,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+              ),
             ),
             new Container(
               margin: new EdgeInsets.only(left: 150.0, right: 150.0),
               child: new RaisedButton(
-                child: new Text("SEND"),
-                onPressed: _createPaymentMethodToken
-              ), 
+                  child: new Text("SEND"),
+                  onPressed: _createPaymentMethodToken),
             )
           ],
         ),
@@ -107,4 +117,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-

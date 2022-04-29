@@ -6,10 +6,10 @@ homepage: https://github.com/Ingenico-NPS-Latam/nps-sdk-dart
 documentation: https://developers.nps.com.ar/
 
 environment:
-  sdk: '>=2.0.0-dev <3.0.0'
+  sdk: '>=2.10.0 <3.0.0'
 
 dependencies:
-  http: '^0.11.3+17' 
-  xml: '^3.2.0'
-  xml2json: '^3.0.1'
+  http: '^0.13.4'
+  xml: '^5.0.2'
+  xml2json: '^5.3.2'
  

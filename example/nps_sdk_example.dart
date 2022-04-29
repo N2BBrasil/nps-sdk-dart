@@ -17,7 +17,7 @@ main(List<String> arguments) async {
     "psp_ClientSession": "YOUR_CLIENT_SESSION"
   };
 
-  Future response = nps.createPaymentMethodToken(nps, createPaymentMethodTokenParams);
-  response.then((resp) => jsonPrettyPrint(resp))
-          .catchError((error) => print);
+  Future response =
+      nps.createPaymentMethodToken(createPaymentMethodTokenParams);
+  response.then((resp) => jsonPrettyPrint(resp)).catchError((error) => print);
 }

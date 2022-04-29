@@ -2,15 +2,15 @@ library nps_sdk;
 
 import 'src/constants.dart' as constants;
 import 'src/services.dart' as services;
-import 'src/utilities.dart' as utilities;
 import 'src/soap_client.dart';
+import 'src/utilities.dart' as utilities;
 
 export 'src/constants.dart';
 export 'src/deserializer.dart';
 export 'src/serializer.dart';
 export 'src/services.dart';
-export 'src/utilities.dart';
 export 'src/soap_client.dart';
+export 'src/utilities.dart';
 
 class Nps {
   String _environment;
@@ -38,8 +38,8 @@ class Nps {
     }
   }
 
-  createPaymentMethodToken(nps, params) {
-    var response = sendRequest(nps, params, services.createPaymentMethodToken);
+  createPaymentMethodToken(Map<String, dynamic> params) {
+    var response = sendRequest(this, params, services.createPaymentMethodToken);
     return response;
   }
 
@@ -59,15 +59,20 @@ class Nps {
   }
 
   retrievePaymentMethodToken(nps, params) {
-    var response = sendRequest(nps, params, services.retrievePaymentMethodToken);
+    var response =
+        sendRequest(nps, params, services.retrievePaymentMethodToken);
     return response;
   }
 
-  bool validateCardNumber(String cardNumber) => utilities.hasCorrectSize(cardNumber, maxSize: 24, minSize: 9) && utilities.isValidLuhn(cardNumber);
+  bool validateCardNumber(String cardNumber) =>
+      utilities.hasCorrectSize(cardNumber, maxSize: 24, minSize: 9) &&
+      utilities.isValidLuhn(cardNumber);
 
-  bool validateCardHolderName(String holderName) => utilities.hasCorrectSize(holderName, maxSize: 27, minSize: 2);
+  bool validateCardHolderName(String holderName) =>
+      utilities.hasCorrectSize(holderName, maxSize: 27, minSize: 2);
 
-  bool validateCardSecurityCode(String securityCode) => utilities.hasCorrectSize(securityCode, maxSize: 4, minSize: 3);
+  bool validateCardSecurityCode(String securityCode) =>
+      utilities.hasCorrectSize(securityCode, maxSize: 4, minSize: 3);
 
   bool validateCardExpDate(int year, {int month}) {
     int day = 1;
@@ -78,10 +83,9 @@ class Nps {
     year += year < 100 ? 2000 : 0;
 
     DateTime today = new DateTime.now();
-    DateTime cardExpDate = DateTime.parse(year.toString() + "0" + month.toString() + "0" + day.toString());
+    DateTime cardExpDate = DateTime.parse(
+        year.toString() + "0" + month.toString() + "0" + day.toString());
     Duration difference = cardExpDate.difference(today);
     return difference.inDays > 0;
   }
 }
-
-
