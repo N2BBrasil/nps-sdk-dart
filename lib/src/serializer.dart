@@ -2,7 +2,7 @@ import 'package:xml/xml.dart' show XmlBuilder, XmlNode;
 
 void build(builder, key, value) {
   builder.element(key, nest: () {
-    if(value is List) {
+    if (value is List) {
       buildList(builder, key, value);
     } else if (value is Map) {
       buildMap(builder, value);
@@ -14,9 +14,9 @@ void build(builder, key, value) {
 
 void buildList(builder, list, value) {
   builder.element(list, nest: () {
-      for (var element in list) {
-        element.forEach((key, value) => build(builder, key, value));
-      }
+    for (var element in list) {
+      element.forEach((key, value) => build(builder, key, value));
+    }
   });
 }
 
@@ -30,21 +30,18 @@ void buildString(builder, value) {
 }
 
 XmlNode toXml(params, method) {
-  XmlBuilder builder = new XmlBuilder();
+  final builder = XmlBuilder();
   builder.processing('xml', 'version="1.0"');
   builder.element('SOAP-ENV:Envelope', nest: () {
     builder.element('SOAP-ENV:Body', nest: () {
       builder.element(method, nest: () {
         builder.element('Requerimiento', nest: () {
           builder.attribute('xsi:type', 'RequerimientoStruct_' + method);
-          builder.text(
-              params.forEach((k, v) => build(builder, k, v))
-          );
+          params.forEach((k, v) => build(builder, k, v));
         });
       });
     });
   });
-  XmlNode request = builder.build();
 
-  return request;
+  return builder.buildDocument();
 }

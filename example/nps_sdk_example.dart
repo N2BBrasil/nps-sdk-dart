@@ -1,23 +1,21 @@
-import 'dart:async';
-
 import 'package:nps_sdk/nps_sdk.dart';
 
 main(List<String> arguments) async {
-  Nps nps = new Nps(sandbox);
+  NPSIngenico nps = new NPSIngenico();
 
-  Map createPaymentMethodTokenParams = {
+  final createPaymentMethodTokenParams = <String, dynamic>{
     "psp_Version": "2.2",
-    "psp_MerchantId": "sdk_test",
+    "psp_MerchantId": "",
     "psp_CardInputDetails": {
       "Number": "4507990000000010",
       "ExpirationDate": "2501",
       "SecurityCode": "123",
       "HolderName": "JOHN DOE"
     },
-    "psp_ClientSession": "YOUR_CLIENT_SESSION"
+    "psp_ClientSession": ""
   };
 
-  Future response =
-      nps.createPaymentMethodToken(createPaymentMethodTokenParams);
-  response.then((resp) => jsonPrettyPrint(resp)).catchError((error) => print);
+  await nps.createPaymentMethodToken(
+    createPaymentMethodTokenParams,
+  );
 }

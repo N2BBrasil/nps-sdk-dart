@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:nps_sdk/nps_sdk.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+  HomePage({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
 
   final String title;
 
@@ -12,10 +15,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //Text Controllers
-  TextEditingController _nameController;
-  TextEditingController _cardController;
-  TextEditingController _cvvController;
-  TextEditingController _expController;
+  late TextEditingController _nameController;
+  late TextEditingController _cardController;
+  late TextEditingController _cvvController;
+  late TextEditingController _expController;
 
   //Text Variables
   String _introText =
@@ -37,9 +40,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   _createPaymentMethodToken() async {
-    Nps nps = new Nps(sandbox);
+    NPSIngenico nps = new NPSIngenico();
 
-    Map createPaymentMethodTokenParams = {
+    Map<String, dynamic> createPaymentMethodTokenParams = {
       "psp_Version": "2.2",
       "psp_MerchantId": "sdk_test",
       "psp_CardInputDetails": {
@@ -52,7 +55,7 @@ class _HomePageState extends State<HomePage> {
     };
 
     var response =
-        await nps.createPaymentMethodToken(nps, createPaymentMethodTokenParams);
+        await nps.createPaymentMethodToken(createPaymentMethodTokenParams);
 
     setState(() {
       _responseMsg = response["psp_ResponseMsg"];

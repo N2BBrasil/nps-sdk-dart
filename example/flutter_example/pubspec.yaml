@@ -2,7 +2,7 @@ name: flutter_example
 description: A new Flutter project.
 
 environment:
-  sdk: '>=2.10.0 <3.0.0'
+  sdk: ">=2.13.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -11,7 +11,8 @@ dependencies:
   cupertino_icons: ^0.1.2
 
 dev_dependencies:
-  nps_sdk: "^1.0.0"
+  nps_sdk:
+    path: ../../
   flutter_test:
     sdk: flutter
 
