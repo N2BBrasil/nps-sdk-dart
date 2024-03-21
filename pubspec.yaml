@@ -9,6 +9,7 @@ environment:
   sdk: ">=2.13.0 <3.0.0"
 
 dependencies:
+  firebase_remote_config: ^4.3.18
   http: ^1.1.0
   xml: ^6.3.0
   xml2json: ^6.2.0
