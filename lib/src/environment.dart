@@ -1,3 +1,5 @@
+import 'package:firebase_remote_config/firebase_remote_config.dart';
+
 enum NpsEnvironment {
   sandbox,
   staging,
@@ -19,7 +21,10 @@ extension NpsEnvironmentExtension on NpsEnvironment {
       case NpsEnvironment.sandbox:
         return 'sandbox.nps.com.ar';
       case NpsEnvironment.production:
-        return 'services2.nps.com.ar';
+        final url = FirebaseRemoteConfig.instance.getString('ingenico_environment');
+        if (url.isEmpty) throw Exception('ingenico_environment is empty');
+
+        return url;
       case NpsEnvironment.staging:
       default:
         return 'implementacion.nps.com.ar';
