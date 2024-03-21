@@ -19,7 +19,7 @@ extension NpsEnvironmentExtension on NpsEnvironment {
       case NpsEnvironment.sandbox:
         return 'sandbox.nps.com.ar';
       case NpsEnvironment.production:
-        return 'services2.nps.com.ar';
+        return 'services4.nps.com.ar';
       case NpsEnvironment.staging:
       default:
         return 'implementacion.nps.com.ar';
