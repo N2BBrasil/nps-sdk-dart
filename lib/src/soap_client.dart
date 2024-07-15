@@ -3,16 +3,16 @@ import 'package:nps_sdk/nps_sdk.dart';
 
 Future<Map> sendRequest({
   required String method,
-  required NpsEnvironment environment,
+  required NPSIngenicoInstance instance,
   params,
 }) async {
   var httpRequest = toXml(params, method);
   Response httpResponse = await post(
-    environment.uri,
+    instance.uri,
     headers: {
       "SOAPAction": method,
       "Content-Type": "text/xml; charset=utf-8",
-      "Host": environment.host,
+      "Host": instance.host,
     },
     body: httpRequest.toXmlString(),
   );
